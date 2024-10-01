@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.loginImage {
+  flex: 6;
+  width: 100%;
+  object-fit: cover;
+}
+
+.mainContent {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.header-container {
+  margin-bottom: 20px;
+}
+
+.header {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin-bottom: 2  0px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.googleIcon {
+  width: 24px;
+  margin-right: 10px;
+}
+
+h1,
+h3 {
+  margin: 10px 0;
+  font-weight: normal;
+  text-align: left;
+}
+
+.form {
+  margin: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #800080;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #5f005f;
+}
+
+.footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.footer a {
+  color: #800080;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
