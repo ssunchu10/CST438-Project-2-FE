@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./login.css"; 
-import login from "../assests/image.png";
-import google from "../assests/google.png";
+import "./signUp.css"; 
+import login from '../../assests/image.png';
+import google from '../../assests/google.png'
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -107,7 +107,7 @@ const SignUp = () => {
          </p>
           )}
 
-          <button onClick={handleSubmit}>Sign Up</button>
+          <button className="button" onClick={handleSubmit}>Sign Up</button>
         </form>
 
         <div className="footer">

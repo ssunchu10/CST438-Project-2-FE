@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
-import login from "../assests/image.png";
-import google from "../assests/google.png";
+import login from '../../assests/image.png';
+import google from '../../assests/google.png'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -50,7 +50,7 @@ const Login = () => {
 
     if (valid) {
       console.log(formData);
-      navigate('/products');
+      navigate('/landing');
     }
   };
 
