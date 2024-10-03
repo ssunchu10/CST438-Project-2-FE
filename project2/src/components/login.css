@@ -1,6 +1,8 @@
+/* Base styles for all devices */
 .container {
     display: flex;
     height: 100vh;
+    background-color: whitesmoke;
 }
 
 .loginImage {
@@ -17,6 +19,8 @@
     align-items: center;
     padding: 20px;
     background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.5);
 }
 
 .header-container {
@@ -87,4 +91,59 @@ button:hover {
 
 .footer a:hover {
     text-decoration: underline;
+}
+
+/* Medium Devices (Tablets, 768px and up) */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .loginImage {
+        height: 300px;
+        object-fit: contain;
+        margin-bottom: 20px;
+    }
+
+    .mainContent {
+        padding: 15px;
+    }
+
+    .header {
+        font-size: 24px;
+    }
+
+    button {
+        padding: 10px;
+    }
+}
+
+/* Small Devices (Mobiles, 600px and below) */
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .loginImage {
+        flex: none;
+        height: 200px;
+        object-fit: contain;
+    }
+
+    .mainContent {
+        width: 100%;
+        padding: 10px;
+        box-shadow: none;
+        background-color: transparent;
+    }
+
+    .header {
+        font-size: 22px;
+    }
+
+    button {
+        padding: 10px;
+    }
 }

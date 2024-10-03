@@ -1,6 +1,7 @@
 .container {
   display: flex;
   height: 100vh;
+  background-color: whitesmoke;
 }
 
 .loginImage {
@@ -17,6 +18,8 @@
   align-items: center;
   padding: 20px;
   background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.5);
 }
 
 .header-container {
@@ -34,7 +37,7 @@
   align-items: center;
   justify-content: center;
   padding: 10px;
-  margin-bottom: 2  0px;
+  margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
   cursor: pointer;
@@ -45,16 +48,11 @@
   margin-right: 10px;
 }
 
-h1,
-h3 {
-  margin: 10px 0;
-  font-weight: normal;
-  text-align: left;
-}
-
 .form {
   margin: 20px;
+  width: 100%; 
 }
+
 
 input {
   width: 100%;
@@ -72,6 +70,7 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 button:hover {

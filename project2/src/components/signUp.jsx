@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./login.css";
+import "./login.css"; 
 import login from "../assests/image.png";
 import google from "../assests/google.png";
 
@@ -21,9 +21,25 @@ const SignUp = () => {
     e.preventDefault();
     let valid = true;
 
+    
     // Validation
+    const temp = formData.username;
+    let flag = 0;
+    for (let i = 0; i < temp.length; i++) {
+      if (temp[i] === "@") {
+        flag = 1;
+      }
+
+      if (i === temp.length - 1) {
+        if (flag === 0) {
+          setErrors((prev) => ({ ...prev, username: "Enter a valid Email Address" }));
+          valid = false;
+        }
+      }
+    }
+
     if (formData.username === "") {
-      setErrors((prev) => ({ ...prev, username: "Username is required" }));
+      setErrors((prev) => ({ ...prev, username: "Email is required" }));
       valid = false;
     }
 
@@ -33,7 +49,10 @@ const SignUp = () => {
     }
 
     if (formData.password !== formData.confirmPassword) {
-      setErrors((prev) => ({ ...prev, confirmPassword: "Passwords must match" }));
+      setErrors((prev) => ({
+        ...prev,
+        confirmPassword: "Passwords must match",
+      }));
       valid = false;
     }
 
@@ -44,7 +63,7 @@ const SignUp = () => {
 
   return (
     <div className="container">
-      <img className="loginImage" src={login} alt="Login"></img>
+      <img className="loginImage" src={login} alt="Sign Up" />
       <div className="mainContent">
         <div className="header-container">
           <p className="header">Sign Up to the Website</p>
@@ -56,7 +75,7 @@ const SignUp = () => {
 
         <p>or Sign up with Email</p>
 
-        <div className="form">
+        <form onSubmit={handleSubmit}>
           <label>Email</label>
           <input
             type="text"
@@ -64,7 +83,7 @@ const SignUp = () => {
             placeholder="mail@abc.com"
             onChange={handleChange}
           />
-          {errors.username && <p className="error">{errors.username}</p>}
+          {errors.username && <p className="errors" style={{ color: "red" }}>{errors.username}</p>}
 
           <label>Password</label>
           <input
@@ -73,7 +92,7 @@ const SignUp = () => {
             placeholder="***********"
             onChange={handleChange}
           />
-          {errors.password && <p className="error">{errors.password}</p>}
+          {errors.password && <p className="errors" style={{ color: "red" }}>{errors.password}</p>}
 
           <label>Confirm Password</label>
           <input
@@ -83,11 +102,13 @@ const SignUp = () => {
             onChange={handleChange}
           />
           {errors.confirmPassword && (
-            <p className="error">{errors.confirmPassword}</p>
+           <p className="errors" style={{ color: "red" }}>
+           {errors.confirmPassword}
+         </p>
           )}
 
           <button onClick={handleSubmit}>Sign Up</button>
-        </div>
+        </form>
 
         <div className="footer">
           <p>
