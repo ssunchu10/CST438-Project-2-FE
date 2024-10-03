@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
+import { useNavigate } from "react-router-dom";
 import login from "../assests/image.png";
 import google from "../assests/google.png";
 
@@ -9,6 +10,7 @@ const Login = () => {
     password: ""
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,6 +50,7 @@ const Login = () => {
 
     if (valid) {
       console.log(formData);
+      navigate('/products');
     }
   };
 
