@@ -21,6 +21,21 @@ const Login = () => {
     let valid = true;
 
     // Validation
+    const temp = formData.username;
+    let flag = 0;
+    for (let i = 0; i < temp.length; i++) {
+      if (temp[i] === "@") {
+        flag = 1;
+      }
+
+      if (i === temp.length - 1) {
+        if (flag === 0) {
+          setErrors((prev) => ({ ...prev, username: "Enter a valid Email Address" }));
+          valid = false;
+        }
+      }
+    }
+
     if (formData.username === "") {
       setErrors((prev) => ({ ...prev, username: "Username is required" }));
       valid = false;
@@ -60,7 +75,7 @@ const Login = () => {
               value={formData.username}
               onChange={handleChange}
             />
-            {errors.username && <p className="error">{errors.username}</p>}
+            {errors.username && <p className="error" style={{color : "red"}}>{errors.username}</p>}
 
             <label>Password</label>
             <input
@@ -70,10 +85,10 @@ const Login = () => {
               value={formData.password}
               onChange={handleChange}
             />
-            {errors.password && <p className="error">{errors.password}</p>}
+            {errors.password && <p className="error" style={{color : "red"}}>{errors.password}</p>}
 
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <a href="#">Forgot Password?</a>
+              <p>Forgot Password?</p>
             </div>
 
             <button type="submit" className="button">Login</button>
