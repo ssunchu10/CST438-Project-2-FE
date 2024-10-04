@@ -1,16 +1,16 @@
-.container {
+.signUp-container {
   display: flex;
   height: 100vh;
   background-color: whitesmoke;
 }
 
-.loginImage {
+.signUp-Image {
   flex: 6;
   width: 100%;
   object-fit: cover;
 }
 
-.mainContent {
+.signUp-mainContent {
   flex: 4;
   display: flex;
   flex-direction: column;
@@ -22,17 +22,17 @@
   box-shadow: rgba(0, 0, 0, 0.5);
 }
 
-.header-container {
+.signUp-header-container {
   margin-bottom: 20px;
 }
 
-.header {
+.signUp-header {
   font-size: 28px;
   font-weight: bold;
   text-align: center;
 }
 
-.google {
+.signUp-google {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,18 +43,18 @@
   cursor: pointer;
 }
 
-.googleIcon {
+.signUp-googleIcon {
   width: 24px;
   margin-right: 10px;
 }
 
-.form {
+.signUp-form {
   margin: 20px;
   width: 100%; 
 }
 
 
-input {
+.signUp-input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
@@ -62,10 +62,10 @@ input {
   border-radius: 5px;
 }
 
-button {
+.signUp-button {
   width: 100%;
   padding: 12px;
-  background-color: #800080;
+  background-color: #7ac60a;
   color: white;
   border: none;
   border-radius: 5px;
@@ -73,21 +73,21 @@ button {
   margin-top: 10px;
 }
 
-button:hover {
-  background-color: #5f005f;
+.signUp-button:hover {
+  background-color: #68aa09;
 }
 
-.footer {
+.signUp-footer {
   margin-top: 20px;
   text-align: center;
 }
 
-.footer a {
+.signUp-footer a {
   color: #800080;
   text-decoration: none;
   font-weight: bold;
 }
 
-.footer a:hover {
+.signUp-footer a:hover {
   text-decoration: underline;
 }
