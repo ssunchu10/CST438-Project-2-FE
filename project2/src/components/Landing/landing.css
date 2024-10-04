@@ -1,4 +1,4 @@
-.container {
+.landing-container {
     position: absolute;
     background-image: url("../../assests/background.png");
     background-position: center;
@@ -24,7 +24,7 @@
 }
 
 .main-content h1 {
-    font-size: 60px;
+    font-size: 60px;    
 }
 
 .button {

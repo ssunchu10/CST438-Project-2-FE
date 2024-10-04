@@ -8,7 +8,7 @@ const Landing = () => {
         navigate('/products');
     }
   return (
-    <div className="container">
+    <div className="landing-container">
       <Navbar />
       <div className="main-content" >
         <h1>WISH LIST</h1>

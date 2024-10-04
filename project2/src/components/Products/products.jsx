@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import "./products.css";
+import Navbar from "../Navbar/Navbar";
+import { Link } from 'react-router-dom';
+// import { useNavigate } from "react-router-dom";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -25,35 +29,28 @@ const Products = () => {
       });
   }, []);
   
-  if (loading) return <div className="text-center mt-8">Loading...</div>;
-  if (error) return <div className="text-center mt-8 text-red-500">{error}</div>;
+  if (loading) return <div className="loading-container">Loading...</div>;
+  if (error) return <div className="error-container">{error}</div>;
 
   return (
-    <div className="bg-gray-100 min-h-screen py-8">
-      <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">Our Products</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {products.map((product) => (
-            <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
-              <div className="h-64 overflow-hidden flex justify-center items-center">
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="object-contain max-h-full"
-                />
-              </div>
-              <div className="p-6">
-                <h2 className="text-xl font-semibold mb-2 text-gray-800 truncate">{product.title}</h2>
-                <p className="text-gray-600 text-sm mb-4 h-12 overflow-hidden">{product.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-green-600">${product.price.toFixed(2)}</span>
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+    <div className="products-container">
+      <Navbar />
+      <div className="scrollable-content">
+        <div className='search-container'>
+          <input type='text' placeholder='Enter Product to Search'/>
+        </div>
+        <div className="products-mainContent">
+          <div className='header-container'>
+            <p className='title'>Items</p>
+            <button className='sort'>Sort By</button>
+          </div>
+          <div className='items-container'>
+            {products.map(product => (
+              <Link to={`/product/${product.id}`} key={product.id} className="product-item">
+                <img src={product.image} alt={product.title} className="product-image" />
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>

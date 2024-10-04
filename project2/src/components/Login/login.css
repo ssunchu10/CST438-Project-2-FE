@@ -1,149 +1,149 @@
 /* Base styles for all devices */
-.container {
-    display: flex;
-    height: 100vh;
-    background-color: whitesmoke;
+.login-container {
+  display: flex;
+  height: 100vh;
+  background-color: whitesmoke;
+  top: 0%;
 }
 
 .loginImage {
-    flex: 6;
-    width: 100%;
-    object-fit: cover;
+  flex: 6;
+  width: 100%;
+  object-fit: cover;
 }
 
-.mainContent {
-    flex: 4;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.5);
+.login-mainContent {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 1);
 }
 
-.header-container {
-    margin-bottom: 20px;
+.login-header-container {
+  margin-bottom: 20px;
 }
 
-.header {
-    font-size: 28px; 
-    font-weight: bold;
-    text-align: center;
+.login-header {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
 }
 
-.google {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
+.login-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.googleIcon {
-    width: 24px;
-    margin-right: 10px;
+.login-googleIcon {
+  width: 24px;
+  margin-right: 10px;
 }
 
-h1, h3 {
-    margin: 10px 0;
-    font-weight: normal;
-    text-align: left;
+.login-form {
+  margin: 20px;
+  width: 100%;
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.login-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #800080;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 5px;
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #7ac60a;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 5px;
 }
 
-button:hover {
-    background-color: #5f005f;
+.login-button:hover {
+  background-color: #68aa09;
 }
 
-.footer {
-    margin-top: 20px;
-    text-align: center;
+.login-footer {
+  margin-top: 20px;
+  text-align: center;
 }
 
-.footer a {
-    color: #800080;
-    text-decoration: none;
-    font-weight: bold;
+.login-footer a {
+  color: #800080;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.footer a:hover {
-    text-decoration: underline;
+.login-footer a:hover {
+  text-decoration: underline;
 }
 
 /* Medium Devices (Tablets, 768px and up) */
 @media (max-width: 1024px) {
-    .container {
-        flex-direction: column;
-        height: auto;
-    }
+  .login-container {
+    flex-direction: column;
+    height: auto;
+  }
 
-    .loginImage {
-        height: 300px;
-        object-fit: contain;
-        margin-bottom: 20px;
-    }
+  .loginImage {
+    height: 300px;
+    object-fit: contain;
+    margin-bottom: 20px;
+  }
 
-    .mainContent {
-        padding: 15px;
-    }
+  .login-mainContent {
+    padding: 15px;
+  }
 
-    .header {
-        font-size: 24px;
-    }
+  .login-header {
+    font-size: 24px;
+  }
 
-    button {
-        padding: 10px;
-    }
+  .login-button {
+    padding: 10px;
+  }
 }
 
 /* Small Devices (Mobiles, 600px and below) */
 @media (max-width: 600px) {
-    .container {
-        flex-direction: column;
-        padding: 10px;
-    }
+  .login-container {
+    flex-direction: column;
+    padding: 10px;
+  }
 
-    .loginImage {
-        flex: none;
-        height: 200px;
-        object-fit: contain;
-    }
+  .loginImage {
+    flex: none;
+    height: 200px;
+    object-fit: contain;
+  }
 
-    .mainContent {
-        width: 100%;
-        padding: 10px;
-        box-shadow: none;
-        background-color: transparent;
-    }
+  .login-mainContent {
+    width: 100%;
+    padding: 10px;
+    box-shadow: none;
+    background-color: transparent;
+  }
 
-    .header {
-        font-size: 22px;
-    }
+  .login-header {
+    font-size: 22px;
+  }
 
-    button {
-        padding: 10px;
-    }
+  .login-button {
+    padding: 10px;
+  }
 }
