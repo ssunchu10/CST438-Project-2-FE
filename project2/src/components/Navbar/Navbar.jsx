@@ -1,5 +1,7 @@
 import React from "react";
-import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
+// import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
+import FaShoppingCart from '../../assests/FaShoppingCart.png';
+import FaUserCircle from '../../assests/FaUserCircle.png';
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -20,8 +22,8 @@ const Navbar = () => {
           </a>
         </div>
         <div className="right">
-          <FaShoppingCart className="icon" />
-          <FaUserCircle className="icon" />
+          <img src={FaShoppingCart} alt="FaShoppingCart" className="icon" />
+          <img src={FaUserCircle} alt="FaUserCircle" className="icon" />
         </div>
       </nav>
   );

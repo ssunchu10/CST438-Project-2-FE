@@ -1,0 +1,69 @@
+.container {
+    position: absolute;
+    background-image: url("../../assests/background.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-content-container {
+    align-items: flex-start;
+    padding: 60px;
+    flex: 1;
+  }
+  
+  .description-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    color: white;
+    padding: 20px;
+  }
+  
+  .heading-container {
+    margin-bottom: 30px;
+  }
+  
+  .heading-container h1 {
+    font-size: 60px;
+    margin: 30;
+    line-height: 1.1; 
+  }
+  
+  .button {
+    background-color: #7ac60a;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 250px;
+  }
+  
+  .button:hover {
+    cursor: pointer;
+    background-color: #68aa09;
+  }
+  
+  .email-info {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  
+  .email-info a {
+    color: #7ac60a;
+    text-decoration: none;
+  }
+  
+  .email-info a:hover {
+    text-decoration: underline;
+  }
