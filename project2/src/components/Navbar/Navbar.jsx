@@ -11,13 +11,13 @@ const Navbar = () => {
           <span className="username">Username</span>
         </div>
         <div className="center">
-          <a className="link" href="#home">
+          <a className="link" href="/landing">
             Home
           </a>
-          <a className="link" href="#about">
+          <a className="link" href="/about">
             About
           </a>
-          <a className="link" href="#contact">
+          <a className="link" href="/contact">
             Contact
           </a>
         </div>
