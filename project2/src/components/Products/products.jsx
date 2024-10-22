@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import "./products.css";
 import Navbar from "../Navbar/Navbar";
-import { Link } from 'react-router-dom';
+import ProductDetails from "../ProductDetails/ProductDetails"; 
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -9,6 +10,9 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -31,6 +35,14 @@ const Products = () => {
   }, []);
 
   useEffect(() => {
+    // Check if there's a product ID in the URL on component mount
+    const hash = location.hash.slice(1);
+    if (hash) {
+      setSelectedProductId(Number(hash));
+    }
+  }, [location]);
+
+  useEffect(() => {
     setFilteredProducts(
       products.filter(product =>
         product.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -38,8 +50,22 @@ const Products = () => {
     );
   }, [searchTerm, products]);
 
+  const handleProductClick = (productId) => {
+    setSelectedProductId(productId);
+    navigate(`/products/#${productId}`);
+  };
+
+  const handleCloseProductDetails = () => {
+    setSelectedProductId(null);
+    navigate('/products');
+  };
+
   if (loading) return <div className="loading-container">Loading...</div>;
   if (error) return <div className="error-container">{error}</div>;
+
+  if (selectedProductId) {
+    return <ProductDetails productId={selectedProductId} onClose={handleCloseProductDetails} />;
+  }
 
   return (
     <div className="products-container">
@@ -60,9 +86,9 @@ const Products = () => {
           </div>
           <div className='items-container'>
             {filteredProducts.map(product => (
-              <Link to={`/product/${product.id}`} key={product.id} className="product-item">
+              <div key={product.id} className="product-item" onClick={() => handleProductClick(product.id)}>
                 <img src={product.image} alt={product.title} className="product-image" />
-              </Link>
+              </div>
             ))}
           </div>
         </div>
