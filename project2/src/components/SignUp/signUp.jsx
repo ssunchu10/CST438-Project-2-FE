@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import "./signUp.css";
 import login from "../../assests/image.png";
 import google from "../../assests/google.png";
+import axiosInstance from "../../API/instance";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,31 +20,22 @@ const SignUp = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let valid = true;
 
-    // Validation
-    const temp = formData.username;
-    let flag = 0;
-    for (let i = 0; i < temp.length; i++) {
-      if (temp[i] === "@") {
-        flag = 1;
-      }
-
-      if (i === temp.length - 1) {
-        if (flag === 0) {
-          setErrors((prev) => ({
-            ...prev,
-            username: "Enter a valid Email Address",
-          }));
-          valid = false;
-        }
-      }
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setErrors((prev) => ({
+        ...prev,
+        email: "Please enter a valid email address",
+      }));
+      valid = false;
     }
 
-    if (formData.username === "") {
-      setErrors((prev) => ({ ...prev, username: "Email is required" }));
+    if (formData.email === "") {
+      setErrors((prev) => ({ ...prev, email: "Email is required" }));
       valid = false;
     }
 
@@ -59,7 +53,22 @@ const SignUp = () => {
     }
 
     if (valid) {
-      console.log(formData);
+      try {
+        const response = await axiosInstance.post('/signup/', {
+          email: formData.email,
+          password: formData.password,
+        });
+        console.log(response.data);
+        if(response.data.message === "User successfully created.") {
+          navigate('/');
+        }
+      } catch (error) {
+        console.error('Error during registration:', error.response?.data);
+        if(error.response?.data.error === "User with this email already exists.") {
+          setErrors((prev) => ({ ...prev, email: "User with this email already exists." }));
+          valid = false;
+        }
+      }
     }
   };
 
@@ -77,18 +86,25 @@ const SignUp = () => {
 
         <p>or Sign up with Email</p>
 
+        {errors.general && (
+          <p className="errors" style={{ color: "red" }}>
+            {errors.general}
+          </p>
+        )}
+
         <form onSubmit={handleSubmit} className="signUp-form">
           <label>Email</label>
           <input
             className="signUp-input"
-            type="text"
-            name="username"
+            type="email"  
+            name="email"
             placeholder="mail@abc.com"
+            value={formData.email}
             onChange={handleChange}
           />
-          {errors.username && (
+          {errors.email && (
             <p className="errors" style={{ color: "red" }}>
-              {errors.username}
+              {errors.email}
             </p>
           )}
 
@@ -98,6 +114,7 @@ const SignUp = () => {
             type="password"
             name="password"
             placeholder="***********"
+            value={formData.password}
             onChange={handleChange}
           />
           {errors.password && (
@@ -112,6 +129,7 @@ const SignUp = () => {
             type="password"
             name="confirmPassword"
             placeholder="***********"
+            value={formData.confirmPassword}
             onChange={handleChange}
           />
           {errors.confirmPassword && (
@@ -120,7 +138,7 @@ const SignUp = () => {
             </p>
           )}
 
-          <button className="signUp-button" onClick={handleSubmit}>
+          <button className="signUp-button" type="submit">
             Sign Up
           </button>
         </form>

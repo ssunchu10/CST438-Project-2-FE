@@ -3,10 +3,11 @@ import "./login.css";
 import { useNavigate } from "react-router-dom";
 import login from "../../assests/image.png";
 import google from "../../assests/google.png";
+import axiosInstance from "../../API/instance";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const [errors, setErrors] = useState({});
@@ -18,31 +19,23 @@ const Login = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let valid = true;
+    setErrors({});
 
-    // Validation
-    const temp = formData.username;
-    let flag = 0;
-    for (let i = 0; i < temp.length; i++) {
-      if (temp[i] === "@") {
-        flag = 1;
-      }
-
-      if (i === temp.length - 1) {
-        if (flag === 0) {
-          setErrors((prev) => ({
-            ...prev,
-            username: "Enter a valid Email Address",
-          }));
-          valid = false;
-        }
-      }
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setErrors((prev) => ({
+        ...prev,
+        email: "Please enter a valid email address",
+      }));
+      valid = false;
     }
 
-    if (formData.username === "") {
-      setErrors((prev) => ({ ...prev, username: "Username is required" }));
+    if (formData.email === "") {
+      setErrors((prev) => ({ ...prev, email: "Email is required" }));
       valid = false;
     }
 
@@ -52,14 +45,31 @@ const Login = () => {
     }
 
     if (valid) {
-      console.log(formData);
-      navigate("/landing");
+      try {
+        const response = await axiosInstance.post("/login/", {
+          email: formData.email,
+          password: formData.password,
+        });
+
+        console.log("Login response:", response.data);
+
+        if (response.data.message === "Successfully logged in!") {
+          setErrors({});
+          navigate("/landing");
+        }
+      } catch (error) {
+        console.error("Error during login:", error.response?.data);
+        if (error.response?.data.error === "Invalid Password") {
+          setErrors((prev) => ({ ...prev, password: "Invalid Password" }));
+          valid = false;
+        }
+      }
     }
   };
 
   return (
     <div className="login-container">
-      <img className="loginImage" src={login} alt="Login" />
+      <img className="login-Image" src={login} alt="Login" />
       <div className="login-mainContent">
         <div className="login-header-container">
           <p className="login-header">Login to your Account</p>
@@ -71,49 +81,55 @@ const Login = () => {
 
         <p>or Sign in with Email</p>
 
+        {errors.general && (
+          <p className="errors" style={{ color: "red" }}>
+            {errors.general}
+          </p>
+        )}
+
         <form onSubmit={handleSubmit} className="login-form">
-            <label>Email</label>
-            <input
-              className="login-input"
-              type="text"
-              name="username"
-              placeholder="mail@abc.com"
-              value={formData.username}
-              onChange={handleChange}
-            />
-            {errors.username && (
-              <p className="error" style={{ color: "red" }}>
-                {errors.username}
-              </p>
-            )}
+          <label>Email</label>
+          <input
+            className="login-input"
+            type="email"
+            name="email"
+            placeholder="mail@abc.com"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          {errors.email && (
+            <p className="errors" style={{ color: "red" }}>
+              {errors.email}
+            </p>
+          )}
 
-            <label>Password</label>
-            <input
-              className="login-input"
-              type="password"
-              name="password"
-              placeholder="***********"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            {errors.password && (
-              <p className="error" style={{ color: "red" }}>
-                {errors.password}
-              </p>
-            )}
+          <label>Password</label>
+          <input
+            className="login-input"
+            type="password"
+            name="password"
+            placeholder="***********"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          {errors.password && (
+            <p className="errors" style={{ color: "red" }}>
+              {errors.password}
+            </p>
+          )}
 
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <p>Forgot Password?</p>
-            </div>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <p>Forgot Password?</p>
+          </div>
 
-            <button type="submit" className="login-button">
-              Login
-            </button>
+          <button className="login-button" type="submit">
+            Login
+          </button>
         </form>
 
         <div className="login-footer">
           <p>
-            Not Registered Yet? <a href="/signUp">Create an account</a>
+            Not Registered Yet? <a href="/signup">Create an account</a>
           </p>
         </div>
       </div>
