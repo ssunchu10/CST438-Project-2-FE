@@ -1,6 +1,6 @@
 import React from "react";
 // import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
-import FaShoppingCart from '../../assests/FaShoppingCart.png';
+import listIcon from '../../assests/listIcon.png';
 import FaUserCircle from '../../assests/FaUserCircle.png';
 import "./Navbar.css";
 
@@ -22,7 +22,7 @@ const Navbar = () => {
           </a>
         </div>
         <div className="right">
-          <img src={FaShoppingCart} alt="FaShoppingCart" className="icon" />
+          <img src={listIcon} alt="listIcon" className="icon" />
           <img src={FaUserCircle} alt="FaUserCircle" className="icon" />
         </div>
       </nav>
