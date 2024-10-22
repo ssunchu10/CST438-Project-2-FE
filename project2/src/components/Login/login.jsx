@@ -63,6 +63,10 @@ const Login = () => {
           setErrors((prev) => ({ ...prev, password: "Invalid Password" }));
           valid = false;
         }
+        if (error.response?.data.error === "User not found.") {
+          setErrors((prev) => ({ ...prev, password: "User not found." }));
+          valid = false;
+        }
       }
     }
   };
