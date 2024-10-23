@@ -4,26 +4,83 @@ import Navbar from "../Navbar/Navbar";
 
 function Contact() {
   return (
-    <div className="container">
+    <div className="contact-container">
       <Navbar />
-      <div className="main-content-container">
-        <div className="description-container">
-          <div className="heading-container">
-            <h1>We'd Love to</h1>
-            <h1>Hear From You</h1>
+      <div className="contact-content">
+        <div className="contact-grid">
+          <div className="contact-info">
+            <div className="heading-container">
+              <h1 className="main-title">
+                We'd Love to <br />
+                Hear From You
+              </h1>
+              <p className="subtitle">
+                Your feedback and questions are important to us. Choose the
+                method that works best for you.
+              </p>
+            </div>
+
+            <div className="contact-methods">
+              <div className="contact-card">
+                <h3>Fill Out Our Form</h3>
+                <p>
+                  Share your thoughts or questions through our detailed contact
+                  form
+                </p>
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSfwLAy1iTzu2JoCNVLJAlvwjfPCrQKaJuSbJaFDMc08Knsq6Q/viewform?usp=send_form"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Fill out this form
+                </a>
+              </div>
+
+              <div className="contact-card">
+                <h3>Email Us Directly</h3>
+                <p>
+                  Send us an email and we'll get back to you
+                </p>
+                <a
+                  href="mailto:contact@company.com"
+                  className="contact-button email-button"
+                >
+                  contact@yourcompany.com
+                </a>
+              </div>
+
+              <div className="contact-card">
+                <h3>Office Hours</h3>
+                <p>Tuesday and Thursday</p>
+                <p>10:00 AM - 11:50 AM PST</p>
+                <p className="response-time">Average response time: 24 hours</p>
+              </div>
+            </div>
           </div>
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfwLAy1iTzu2JoCNVLJAlvwjfPCrQKaJuSbJaFDMc08Knsq6Q/viewform?usp=send_form"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="button"
-          >
-            Fill out this form
-          </a>
-          <p className="email-info">
-            Or email us directly at:{" "}
-            <a href="mailto:contact@yourcompany.com">contact@yourcompany.com</a>
-          </p>
+
+          <div className="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div className="faq-list">
+              <div className="faq-item">
+                <h3>idk ask another question</h3>
+                <p>
+                  erm 1
+                </p>
+              </div>
+              <div className="faq-item">
+                <h3>idk ask another question</h3>
+                <p>
+                  erm 2
+                </p>
+              </div>
+              <div className="faq-item">
+                <h3>idk ask another question</h3>
+                <p>
+                  erm 3
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

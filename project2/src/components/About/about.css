@@ -1,50 +1,131 @@
-.container {
-    position: absolute;
-    background-image: url("../../assests/background.png");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    opacity: 0.9;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+.about-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../assests/background.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-y: auto;
+}
+
+.about-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px 40px 20px;
+  color: white;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.main-title {
+  font-size: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.subtitle {
+  font-size: 20px;
+  margin: 10px 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.header-underline {
+  width: 60px;
+  height: 3px;
+  background-color: #4CAF50;
+  margin: 20px auto;
+}
+
+.team-section {
+  margin-bottom: 60px;
+}
+
+.team-section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.team-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+}
+
+.member-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-info {
+  padding: 20px;
+}
+
+.member-info h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.member-info h4 {
+  margin: 10px 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: normal;
+}
+
+.member-info p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+@media (max-width: 1200px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .main-content-container {
-    align-items: flex-start;
-    padding: 60px;
-    flex: 1;
-  }
-  
-  .description-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    text-align: left;
-    color: white;
-    padding: 100px;
-    margin-left: 100px;
-  }
-  
-  .heading-container {
-    margin-bottom: 30px;
-  }
-  
-  .heading-container h1 {
-    font-size: 60px;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 30;
-    line-height: 1.1; 
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    padding: 60px 20px 30px;
   }
 
-  .heading-container h2 {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 30;
-    line-height: 1.1; 
-    margin-left: 40px;
+  .main-title {
+    font-size: 32px;
   }
+
+  .subtitle {
+    font-size: 18px;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}

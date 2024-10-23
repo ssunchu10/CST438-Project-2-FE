@@ -39,8 +39,12 @@
   gap: 40px;
   height: 40px;
   width: 40px;
-}
 
+}
+.icon{
+  height: 40px;
+  width: 40px;
+}
 .icon:hover {
   cursor: pointer;
 }
