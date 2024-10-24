@@ -14,26 +14,23 @@ import ProfilePage from "./components/ProfilePage/profilePage";
 import ListPage from "./components/ListPage/listPage";
 import CreateUserPage from "./components/CreateUserPage/createUserPage";
 
-
 const App = () => {
-  return(
-    <>
-      <Routes>
-        <Route path="/" element={<Login />}/>
-        <Route path="/signUp" element={<SignUp />}/>
-        <Route path="/products" element={<Products />}/>
-        <Route path="/landing" element={<Landing/>} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
+  return (
+    <Routes>
+      <Route path="/" element={<Login />}/>
+      <Route path="/signUp" element={<SignUp />}/>
+      <Route path="/products" element={<Products />}/>
+      <Route path="/landing" element={<Landing/>} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/about" element={<About />} />
 
-        <Route path="/addItemPage" element={<AddItemPage />} />
-        <Route path="/deleteItemPage" element={<DeleteItemPage />} />
-        <Route path="/adminProfilePage" element={<AdminProfilePage />} />
-        <Route path="/profilePage" element={<ProfilePage />} />
-        <Route path="/listPage" element={<ListPage />} />
-        <Route path="/createUserPage" element={<CreateUserPage />} />
-      </Routes>
-    </>
+      <Route path="/addItemPage" element={<AddItemPage />} />
+      <Route path="/deleteItemPage" element={<DeleteItemPage />} />
+      <Route path="/adminProfilePage" element={<AdminProfilePage />} />
+      <Route path="/profilePage" element={<ProfilePage />} />
+      <Route path="/listPage" element={<ListPage />} />
+      <Route path="/createUserPage" element={<CreateUserPage />} />
+    </Routes>
   );
 }
 
