@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import login from "../../assests/image.png";
 import google from "../../assests/google.png";
 import axiosInstance from "../../API/instance";
+import { UserContext } from "../UserContext";
 
 const Login = () => {
+  const { setUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -52,7 +54,11 @@ const Login = () => {
         });
 
         console.log("Login response:", response.data);
-
+        const emailNav = response.data.data.email;
+        const username = emailNav.split('@')[0];
+        
+        setUser({ username: username, isAdmin: response.data.data.is_admin})
+        console.log("Username: ", username);
         if (response.data.message === "Successfully logged in!") {
           setErrors({});
           navigate("/landing");

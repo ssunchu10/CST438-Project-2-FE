@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import listIcon from '../../assests/listIcon.png';
 import FaUserCircle from '../../assests/FaUserCircle.png';
 import "./Navbar.css";
+import { UserContext } from "../UserContext";
 
 const Navbar = () => {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   
-  const user = {
-    username: "Username",
-    is_admin: 0  // defaults to regular user
-  };
 
   const handleProfileClick = () => {
-    if (user.is_admin === 1) {
+    if (user.isAdmin) {
       navigate('/adminProfilePage');
     } else {
       navigate('/profilePage');

@@ -6,7 +6,7 @@ import Products from "./components/Products/products";
 import Landing from "./components/Landing/landing";
 import Contact from "./components/Contact/contact";
 import About from "./components/About/about";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 import AddItemPage from "./components/AddItemPage/addItemPage";
 import DeleteItemPage from "./components/DeleteItemPage/deleteItemPage";
 import AdminProfilePage from "./components/ProfilePage/adminProfilePage";
@@ -28,7 +28,12 @@ const App = () => {
 
         <Route path="/addItemPage" element={<AddItemPage />} />
         <Route path="/deleteItemPage" element={<DeleteItemPage />} />
-        <Route path="/adminProfilePage" element={<AdminProfilePage />} />
+        <Route path="/adminProfilePage" element={
+          <ProtectedRoute isAdminRoute={true}>
+            <AdminProfilePage />
+          </ProtectedRoute>
+        } 
+      />
         <Route path="/profilePage" element={<ProfilePage />} />
         <Route path="/listPage" element={<ListPage />} />
         <Route path="/createUserPage" element={<CreateUserPage />} />
