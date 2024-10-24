@@ -98,7 +98,7 @@ const SignUp = () => {
             className="signUp-input"
             type="email"  
             name="email"
-            placeholder="mail@abc.com"
+            placeholder="Enter email"
             value={formData.email}
             onChange={handleChange}
           />

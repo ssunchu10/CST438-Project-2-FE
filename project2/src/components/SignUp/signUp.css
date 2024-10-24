@@ -63,6 +63,15 @@
   border-radius: 5px;
 }
 
+.signUp-input {
+  color: #333333; 
+}
+
+.signUp-input::placeholder {
+  color: #999999;
+  opacity: 1; 
+}
+
 .signUp-button {
   width: 100%;
   padding: 12px;

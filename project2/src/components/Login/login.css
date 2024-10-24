@@ -63,6 +63,15 @@
   border-radius: 5px;
 }
 
+.login-input {
+  color: #333333; 
+}
+
+.login-input::placeholder {
+  color: #999999;
+  opacity: 1; 
+}
+
 .login-button {
   width: 100%;
   padding: 12px;

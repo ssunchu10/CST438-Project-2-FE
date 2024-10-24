@@ -14,8 +14,6 @@ import ProfilePage from "./components/ProfilePage/profilePage";
 import ListPage from "./components/ListPage/listPage";
 import CreateUserPage from "./components/CreateUserPage/createUserPage";
 
-import { List } from "lucide-react";
-
 
 const App = () => {
   return(
