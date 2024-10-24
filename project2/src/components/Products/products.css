@@ -15,13 +15,13 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    overflow-y: auto;
 }
 
 .scrollable-content {
     position: relative;
     height: 100vh;
-    overflow-y: auto;
-    padding-top: 120px; /* Adjust based on your navbar height + desired space */
+    padding-top: 120px;
 }
 
 .search-container {
@@ -38,7 +38,7 @@
 }
 
 .products-mainContent {
-    padding-top: 20px; 
+    margin-top: 30px;
 }
 
 .search-container input {

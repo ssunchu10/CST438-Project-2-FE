@@ -14,17 +14,17 @@ import ProfilePage from "./components/ProfilePage/profilePage";
 import ListPage from "./components/ListPage/listPage";
 import CreateUserPage from "./components/CreateUserPage/createUserPage";
 
-
 const App = () => {
-  return(
+  return (
     <>
-      <Routes>
-        <Route path="/" element={<Login />}/>
-        <Route path="/signUp" element={<SignUp />}/>
-        <Route path="/products" element={<Products />}/>
-        <Route path="/landing" element={<Landing/>} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
+    <Routes>
+      <Route path="/" element={<Login />}/>
+      <Route path="/signUp" element={<SignUp />}/>
+      <Route path="/products" element={<Products />}/>
+      <Route path="/landing" element={<Landing/>} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/about" element={<About />} />
+
 
         <Route path="/addItemPage" element={<AddItemPage />} />
         <Route path="/deleteItemPage" element={<DeleteItemPage />} />

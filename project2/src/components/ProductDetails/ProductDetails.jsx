@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from "../../API/instance";
 import Navbar from '../Navbar/Navbar';
-import { Minus, Plus, ChevronDown, ArrowLeft } from 'lucide-react';
+import { Minus, Plus, ArrowLeft } from 'lucide-react';
 import './ProductDetails.css';
 
 const ProductDetails = ({ productId, onClose }) => {
@@ -30,11 +30,9 @@ const ProductDetails = ({ productId, onClose }) => {
   }, [productId]);
 
   const handleGoBack = () => {
-    // First call the onClose prop to update parent state
     if (onClose) {
       onClose();
     }
-    // Then navigate
     navigate('/products', { replace: true });
   };
 
@@ -64,13 +62,6 @@ const ProductDetails = ({ productId, onClose }) => {
             <div className="product-info">
               <h2 className="product-title">{product.item_name}</h2>
               <p className="product-price">${product.price}</p>
-              <div className="product-category">
-                <span>{product.item_name}</span>
-              </div>
-              <div className="product-category">
-                <span>category</span>
-                <ChevronDown className="dropdown-icon" />
-              </div>
               <p className="product-description">{product.description}</p>
               <div className="product-availability">
                 <span>availability: {product.quantity} in stock</span>

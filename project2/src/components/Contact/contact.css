@@ -15,6 +15,7 @@
 .contact-content {
   max-width: 1400px;
   margin: 0 auto;
+  margin-top: 50px;
   padding: 80px 20px 40px 20px;
   color: white;
 }
@@ -28,7 +29,9 @@
 
 .heading-container {
   margin-bottom: 40px;
-  background-color: #022022;
+  background-color: transparent;
+  padding: 20px;
+  margin-left: 150px;
 }
 
 .main-title {
