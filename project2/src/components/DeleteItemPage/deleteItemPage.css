@@ -1,0 +1,197 @@
+.delete-item-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../assests/background.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-y: auto; 
+}
+
+.scrollable-content {
+  position: relative;
+  height: 100vh;
+  overflow-y: auto;
+  /* Increased padding-top to accommodate both navbar and search bar */
+  padding-top: 180px; 
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  /* Adjusted to be below navbar */
+  top: 80px;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.search-container input {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.delete-item-mainContent {
+  padding: 0 5%;
+  /* Added position relative to ensure proper stacking */
+  position: relative;
+  margin-top: 50px;
+  z-index: 1;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  /* Added background to ensure visibility */
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Rest of the CSS remains the same */
+.title {
+  color: white;
+  font-size: 35px;
+  margin: 0;
+}
+
+.selection-controls {
+  display: flex;
+  gap: 15px;
+}
+
+.select-all-button,
+.delete-selected-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select-all-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.delete-selected-button {
+  background-color: #ff4444;
+  border: none;
+  color: white;
+}
+
+.select-all-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.delete-selected-button:hover {
+  background-color: #ff3333;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.delete-item-card {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.delete-item-card:hover {
+  transform: translateY(-5px);
+}
+
+.item-checkbox {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+}
+
+.item-checkbox input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.item-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.item-info {
+  padding: 15px;
+  color: white;
+}
+
+.item-info h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.item-category {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.item-price {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.quick-delete-button {
+  width: 100%;
+  padding: 12px;
+  background-color: rgba(255, 68, 68, 0.1);
+  border: none;
+  color: #ff4444;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quick-delete-button:hover {
+  background-color: #ff4444;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .selection-controls {
+    justify-content: space-between;
+  }
+}

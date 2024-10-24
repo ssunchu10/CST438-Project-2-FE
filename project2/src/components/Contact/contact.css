@@ -1,70 +1,185 @@
-.container {
-    position: absolute;
-    background-image: url("../../assests/background.png");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    opacity: 0.9;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+.contact-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../assests/background.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-y: auto;
+}
+
+.contact-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 20px 40px 20px;
+  color: white;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.heading-container {
+  margin-bottom: 40px;
+  background-color: #022022;
+}
+
+.main-title {
+  font-size: 48px;
+  line-height: 1.2;
+  margin: 0;
+  background: linear-gradient(to right, #ffffff, #b8b8b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 20px;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.contact-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.contact-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 25px;
+  transition: transform 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+}
+
+.contact-card h3 {
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  color: #4CAF50;
+}
+
+.contact-card p {
+  margin: 0 0 20px 0;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.contact-button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.email-button {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.email-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.response-time {
+  color: #4CAF50;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.faq-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.faq-section h2 {
+  margin: 0 0 30px 0;
+  font-size: 24px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faq-item {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-3px);
+}
+
+.faq-item h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #4CAF50;
+}
+
+.faq-item p {
+  margin: 0;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
   }
   
-  .main-content-container {
-    align-items: flex-start;
-    padding: 60px;
-    flex: 1;
+  .main-title {
+    font-size: 36px;
   }
   
-  .description-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    text-align: center;
-    color: white;
+  .contact-methods {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-content {
+    padding: 60px 20px 30px;
+  }
+
+  .main-title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .contact-card,
+  .faq-item {
     padding: 20px;
   }
-  
-  .heading-container {
-    margin-bottom: 30px;
-  }
-  
-  .heading-container h1 {
-    font-size: 60px;
-    margin: 30;
-    line-height: 1.1; 
-  }
-  
-  .button {
-    background-color: #7ac60a;
-    border: none;
-    border-radius: 50px;
-    color: white;
-    padding: 10px 20px;
-    margin-top: 200px;
-    margin-left: 100px;
-  }
-  
-  .button:hover {
-    cursor: pointer;
-    background-color: #68aa09;
-  }
-  
-  .email-info {
-    margin-top: 20px;
-    font-size: 18px;
-  }
-  
-  .email-info a {
-    color: #7ac60a;
-    text-decoration: none;
-  }
-  
-  .email-info a:hover {
-    text-decoration: underline;
-  }
+}

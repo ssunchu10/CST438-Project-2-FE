@@ -12,7 +12,7 @@ const Landing = () => {
       <Navbar />
       <div className="main-content" >
         <h1>WISH LIST</h1>
-        <h1>Dreams Come True</h1>
+        <h1>dreams come true</h1>
         <p>Turn your dreams into a clickable reality</p>
         <button className="button" onClick={handleOrder}>Order</button>
       </div>
