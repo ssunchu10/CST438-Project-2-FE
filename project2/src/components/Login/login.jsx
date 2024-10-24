@@ -54,6 +54,7 @@ const Login = () => {
         console.log("Login response:", response.data);
 
         if (response.data.message === "Successfully logged in!") {
+          localStorage.setItem('userData', JSON.stringify(response.data.data));
           setErrors({});
           navigate("/landing");
         }

@@ -9,6 +9,8 @@ const DeleteItemPage = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState(null);
+  const [itemToDelete, setItemToDelete] = useState(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -37,11 +39,19 @@ const DeleteItemPage = () => {
     );
   }, [searchTerm, products]);
 
-  const handleDelete = async (item_id) => {
+  const handleDeleteClick = (item) => {
+    setItemToDelete(item);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!itemToDelete) return;
 
     try {
-      await axiosInstance.delete(`/items/${item_id}/delete/`);
-      setProducts(products.filter((product) => product.id !== item_id));
+      await axiosInstance.delete(`/items/${itemToDelete.id}/delete/`);
+      setProducts(products.filter((product) => product.id !== itemToDelete.id));
+      setIsDeleteDialogOpen(false);
+      setItemToDelete(null);
     } catch (error) {
       console.error(
         "Error deleting item:",
@@ -52,6 +62,11 @@ const DeleteItemPage = () => {
           (error.response?.data?.message || error.message)
       );
     }
+  };
+
+  const handleCancelDelete = () => {
+    setIsDeleteDialogOpen(false);
+    setItemToDelete(null);
   };
 
   if (loading) return <div className="loading-container">Loading...</div>;
@@ -67,6 +82,7 @@ const DeleteItemPage = () => {
             placeholder="Search items to delete"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
           />
         </div>
 
@@ -89,13 +105,39 @@ const DeleteItemPage = () => {
                 </div>
                 <button
                   className="quick-delete-button"
-                  onClick={() => handleDelete(item.id)}
+                  onClick={() => handleDeleteClick(item)}
                 >
                   Delete
                 </button>
               </div>
             ))}
           </div>
+
+          {isDeleteDialogOpen && (
+            <div className="modal-overlay">
+              <div className="modal-content">
+                <h2 className="modal-title">Confirm Deletion</h2>
+                <p className="modal-message">
+                  Are you sure you want to delete "{itemToDelete?.item_name}"?
+                </p>
+                <p className="modal-message">This action cannot be undone.</p>
+                <div className="modal-buttons">
+                  <button
+                    className="modal-button cancel-button"
+                    onClick={handleCancelDelete}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="modal-button delete-button"
+                    onClick={handleConfirmDelete}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
