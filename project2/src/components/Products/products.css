@@ -15,12 +15,12 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    overflow-y: auto;
 }
 
 .scrollable-content {
     position: relative;
     height: 100vh;
-    overflow-y: auto;
     padding-top: 120px;
 }
 
