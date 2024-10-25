@@ -9,12 +9,13 @@ const ListPage = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newListName, setNewListName] = useState('');
   const [isPublic, setIsPublic] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem('userData'));
   
     if (userData && userData.id) {
-      console.log(userData.id);
+      setUserInfo(userData);
       fetchLists(userData.id);
     }
   }, []);
@@ -22,6 +23,7 @@ const ListPage = () => {
   const fetchLists = async (userId) => {
     try {
       const response = await axiosInstance.get(`/user/${userId}/lists/`);
+      console.log(response.data)
       setLists(response.data);
     } catch (error) {
       console.error('Error fetching lists:', error);
@@ -31,15 +33,18 @@ const ListPage = () => {
   const handleCreateList = async () => {
     try {
       const response = await axiosInstance.post('/createList/', {
+        user_id: userInfo.id, 
         name: newListName,
         is_public: isPublic,
       });
+
+      console.log(response.data)
   
       if (response.status === 201) {
         setNewListName('');
         setIsPublic(false);
         setShowCreateModal(false);
-        fetchLists();
+        fetchLists(userInfo.id);
       } else {
         console.error('Unexpected response:', response);
       }
