@@ -6,14 +6,14 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  
-  const user = {
-    username: "Username",
-    is_admin: 0  // defaults to regular user
-  };
+
+  const userData = JSON.parse(localStorage.getItem('userData'));
+  const username = userData.email.split('@')[0];
+  const capitalizedUsername = username.charAt(0).toUpperCase() + username.slice(1);
+  const isAdmin = userData.is_admin;
 
   const handleProfileClick = () => {
-    if (user.is_admin === 1) {
+    if (isAdmin === true) {
       navigate('/adminProfilePage');
     } else {
       navigate('/profilePage');
@@ -23,7 +23,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="left">
-        <span className="username">{user.username}</span>
+        <span className="username">Welcome {capitalizedUsername}</span>
       </div>
       
       <div className="center">
@@ -51,7 +51,7 @@ const Navbar = () => {
         <div onClick={handleProfileClick} style={{ cursor: 'pointer' }}>
           <img src={FaUserCircle} alt="Profile" className="icon" />
         </div>
-        {user.is_admin === 1 && (
+        {isAdmin === true && (
           <span className="admin-badge">Admin</span>
         )}
       </div>
