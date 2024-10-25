@@ -26,8 +26,8 @@ const ProfilePage = () => {
   const handleUpdateAccount = async () => {
     try {
       await axiosInstance.patch("/updateAccount/", {
-        email: email,
-        password: password,
+        user_id: userData.id,
+        email: email
       });
       setMessage("Account updated successfully!");
     } catch (error) {
