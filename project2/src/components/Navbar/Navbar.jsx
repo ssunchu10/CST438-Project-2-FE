@@ -42,6 +42,9 @@ const Navbar = () => {
         <Link className="link" to="/addItemPage">
           Add
         </Link>
+        <Link className="link" to="/updateItemPage">
+          Update
+        </Link>
       </div>
       
       <div className="right">

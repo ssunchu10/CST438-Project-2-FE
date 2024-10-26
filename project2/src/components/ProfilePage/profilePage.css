@@ -51,6 +51,8 @@
 }
 
 .profile-section {
+  display: flex;
+  flex-direction: column;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -130,6 +132,22 @@
 
 .delete-btn:hover {
   background: rgba(239, 68, 68, 0.2);
+}
+
+.update-btn {
+  background: rgba(239, 68, 68, 0.1); /* Light red background */
+  border: 1px solid #ef4444;          /* Red border */
+  color: #ef4444;                     /* Red text color */
+  padding: 8px 16px;                  /* Add some padding */
+  border-radius: 4px;                 /* Rounded corners */
+  cursor: pointer;                    /* Pointer cursor on hover */
+  font-weight: bold;                  /* Bold text */
+  align-self: flex-end;               /* Align to the right if it's in a flex container */
+  transition: background 0.3s;        /* Smooth hover effect */
+}
+
+.update-btn:hover {
+  background: rgba(239, 68, 68, 0.2); /* Darken background on hover */
 }
 
 .message {

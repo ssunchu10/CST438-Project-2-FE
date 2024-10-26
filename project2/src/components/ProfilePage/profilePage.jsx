@@ -1,70 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./profilePage.css";
 import Navbar from "../Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../API/instance";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("userData"));
+
+  // State hooks must be declared at the top level
+  const [email, setEmail] = useState(userData ? userData.email : "");
+  const [password, setPassword] = useState("");
+  const [deletePassword, setDeletePassword] = useState("");
+
+  useEffect(() => {
+    if (!userData) {
+      alert("User not Logged in");
+      navigate("/");
+    }
+  }, [navigate, userData]);
+
+  if (!userData) return null; // Prevents rendering if userData is null
+
   const username = userData.email.split("@")[0];
   const capitalizedUsername =
     username.charAt(0).toUpperCase() + username.slice(1);
 
-  const [email, setEmail] = useState(userData.email);
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleLogout = () => {
+    alert("Successfully Logged Out!");
+    localStorage.removeItem("userData");
+    navigate("/");
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleUpdateAccount = async () => {
-    try {
-      await axiosInstance.patch("/updateAccount/", {
-        user_id: userData.id,
-        email: email
-      });
-      setMessage("Account updated successfully!");
-    } catch (error) {
-      setMessage("Error updating account");
-      console.error("Error updating account:", error);
+  const handleUpdate = () => {
+    if (email !== userData.email) {
+      localStorage.setItem("userData", JSON.stringify({ ...userData, email }));
     }
-  };
-
-  const handleDeleteAccount = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete your account?"
-    );
-    if (confirmDelete) {
-      try {
-        await axiosInstance.delete("/deleteAccount/", {
-          data: { password: password },
-        });
-        setMessage("Account deleted successfully");
-        localStorage.removeItem("userData");
-        navigate("/");
-      } catch (error) {
-        setMessage(
-          "Error deleting account. Please ensure your password is correct."
-        );
-        console.error("Error deleting account:", error);
-      }
+    if (password) {
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({ ...userData, password })
+      );
     }
+    alert("Profile updated successfully");
   };
 
-  const handleLogout = async () => {
-    try {
-      await axiosInstance.post("/logout/");
+  const handleDelete = () => {
+    if (deletePassword === userData.password) {
+      alert("Account Deleted Successfully");
       localStorage.removeItem("userData");
       navigate("/");
-    } catch (error) {
-      console.error("Error during logout:", error);
-      setMessage("Error during logout. Please try again.");
+    } else {
+      alert("INVALID PASSWORD");
     }
   };
 
@@ -81,7 +67,6 @@ const ProfilePage = () => {
               Logout
             </button>
           </div>
-
           <div className="profile-sections">
             <div className="profile-section">
               <h2>Account Details</h2>
@@ -91,24 +76,22 @@ const ProfilePage = () => {
                   <input
                     type="email"
                     value={email}
-                    onChange={handleEmailChange}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
-                  <button className="edit-btn" onClick={handleUpdateAccount}>
-                    Edit
-                  </button>
                 </div>
                 <div className="detail-item">
                   <label>Password</label>
                   <input
                     type="password"
+                    placeholder="Enter new password"
                     value={password}
-                    onChange={handlePasswordChange}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
-                  <button className="edit-btn" onClick={handleUpdateAccount}>
-                    Change
-                  </button>
                 </div>
               </div>
+              <button className="update-btn" onClick={handleUpdate}>
+                Update
+              </button>
             </div>
             <div className="profile-section">
               <h2>Delete Account</h2>
@@ -116,17 +99,16 @@ const ProfilePage = () => {
                 <input
                   type="password"
                   placeholder="Enter your password to delete account"
-                  value={password}
-                  onChange={handlePasswordChange}
+                  value={deletePassword}
+                  onChange={(e) => setDeletePassword(e.target.value)}
                 />
-                <button className="delete-btn" onClick={handleDeleteAccount}>
+                <button className="delete-btn" onClick={handleDelete}>
                   Delete Account
                 </button>
               </div>
             </div>
           </div>
         </div>
-        {message && <p className="message">{message}</p>}
       </div>
     </div>
   );

@@ -9,22 +9,35 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 .scrollable-content {
-  position: relative;
-  height: 100vh;
+  flex: 1;
   overflow-y: auto;
-  /* Increased padding-top to accommodate both navbar and search bar */
-  padding-top: 180px; 
+  padding-top: 180px;
+  height: calc(100vh - 80px); /* Account for navbar height */
+  margin-right: 0; /* Ensure no right margin pushes content */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent; /* For Firefox */
+}
+
+/* Webkit scrollbar styling */
+.scrollable-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
 }
 
 .search-container {
-  display: flex;
-  justify-content: center;
   position: fixed;
-  /* Adjusted to be below navbar */
   top: 80px;
   left: 0;
   width: 100%;
@@ -34,26 +47,12 @@
   backdrop-filter: blur(5px);
 }
 
-.search-container input {
-  width: 100%;
-  max-width: 600px;
-  padding: 12px 20px;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-  color: white;
-  font-size: 16px;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
 .delete-item-mainContent {
   padding: 0 5%;
-  /* Added position relative to ensure proper stacking */
   position: relative;
   margin-top: 50px;
   z-index: 1;
+  padding-bottom: 40px; /* Add bottom padding for better scroll experience */
 }
 
 .header-container {
