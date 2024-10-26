@@ -9,6 +9,7 @@ import About from "./components/About/about";
 
 import AddItemPage from "./components/AddItemPage/addItemPage";
 import DeleteItemPage from "./components/DeleteItemPage/deleteItemPage";
+import UpdateItemPage from "./components/UpdateItemPage/updateItemPage";
 import AdminProfilePage from "./components/ProfilePage/adminProfilePage";
 import ProfilePage from "./components/ProfilePage/profilePage";
 import ListPage from "./components/ListPage/listPage";
@@ -26,6 +27,7 @@ const App = () => {
 
       <Route path="/addItemPage" element={<AddItemPage />} />
       <Route path="/deleteItemPage" element={<DeleteItemPage />} />
+      <Route path="/updateItemPage" element={<UpdateItemPage />} />
       <Route path="/adminProfilePage" element={<AdminProfilePage />} />
       <Route path="/profilePage" element={<ProfilePage />} />
       <Route path="/listPage" element={<ListPage />} />
