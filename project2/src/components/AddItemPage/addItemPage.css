@@ -9,140 +9,122 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  overflow-y: auto; 
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.scrollable-content {
+  min-height: 100%;
+  padding-bottom: 2rem;
 }
 
 .add-item-mainContent {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
 }
 
 .header-container {
-  margin-bottom: 30px;
-  margin-top: 0;
+  margin: 2.5rem 0 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .title {
   color: white;
-  font-size: 35px;
+  font-size: 2.25rem;
+  font-weight: 600;
   margin: 0;
+  letter-spacing: 0.5px;
 }
 
 .form-container {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 40px;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  padding: 30px;
-  border-radius: 15px;
-}
-
-.image-upload-section {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.image-preview {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 2px dashed rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.image-preview:hover {
-  border-color: rgba(255, 255, 255, 0.5);
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.upload-placeholder {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
-}
-
-.upload-icon {
-  font-size: 40px;
-  margin-bottom: 10px;
-}
-
-.file-info {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.file-input {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .item-details-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.75rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.75rem;
 }
 
 .input-group label {
   color: white;
-  font-size: 14px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 .input-group input,
-.input-group select,
 .input-group textarea {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.875rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.08);
   color: white;
-  font-size: 16px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-group textarea {
+  min-height: 120px;
+  resize: vertical;
 }
 
 .input-group input:focus,
-.input-group select:focus,
 .input-group textarea:focus {
   outline: none;
-  border-color: rgba(255, 255, 255, 0.5);
-  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .button-group {
   display: flex;
-  gap: 20px;
-  margin-top: 20px;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  justify-content: center;
 }
 
 .cancel-button,
 .submit-button {
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
+  width: 160px;
+  height: 48px;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
 .cancel-button {
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: white;
+  margin-top: 10px;
 }
 
 .submit-button {
@@ -153,14 +135,43 @@
 
 .cancel-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .submit-button:hover {
   background-color: #45a049;
+  transform: translateY(-1px);
+}
+
+.submit-button:disabled {
+  background-color: rgba(76, 175, 80, 0.6);
+  cursor: not-allowed;
+  transform: none;
 }
 
 @media (max-width: 768px) {
+  .add-item-container {
+    padding: 1rem;
+  }
+  
   .form-container {
-    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+  
+  .header-container {
+    margin: 1.5rem 0 2rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .submit-button {
+    width: 100%;
   }
 }
