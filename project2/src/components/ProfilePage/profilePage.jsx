@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./profilePage.css";
 import Navbar from "../Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../API/instance";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -9,10 +10,12 @@ const ProfilePage = () => {
 
   const [email, setEmail] = useState(userData ? userData.email : "");
   const [password, setPassword] = useState("");
-  const [deletePassword, setDeletePassword] = useState("");
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    if (!userData) {
+    if (userData) {
+      setUserId(userData.id);
+    }else {
       alert("User not Logged in");
       navigate("/");
     }
@@ -30,26 +33,53 @@ const ProfilePage = () => {
     navigate("/");
   };
 
-  const handleUpdate = () => {
-    if (email !== userData.email) {
-      localStorage.setItem("userData", JSON.stringify({ ...userData, email }));
+
+  const handleUpdate = async () => {
+    const updateData = { user_id: userId }; 
+
+    if (email !== userData.email && email.trim() !== "") {
+      updateData.email = email;
     }
     if (password) {
-      localStorage.setItem(
-        "userData",
-        JSON.stringify({ ...userData, password })
-      );
+      updateData.password = password;
     }
-    alert("Profile updated successfully");
+    if (Object.keys(updateData).length === 1) {
+      alert("No changes to update.");
+      return;
+    }
+    try {
+      const response = await axiosInstance.patch("/updateAccount/", updateData);
+      if (response.status === 200) {
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({ ...userData, ...updateData })
+        );
+        alert("Profile updated successfully");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      alert("Failed to update profile");
+    }
   };
 
-  const handleDelete = () => {
-    if (deletePassword === userData.password) {
-      alert("Account Deleted Successfully");
-      localStorage.removeItem("userData");
-      navigate("/");
-    } else {
-      alert("INVALID PASSWORD");
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete your account? This action cannot be undone."
+    );
+
+    if (!confirmDelete) {
+      return; 
+    }
+    try {
+      const response = await axiosInstance.delete(`/deleteAccount/${userId}/`);
+      if (response.status === 200) {
+        localStorage.removeItem("userData");
+        alert("Account Deleted Successfully");
+        navigate("/")
+      }
+    } catch (error) {
+      console.error("Error deleting account:", error);
+      alert("Failed to delete account");
     }
   };
 
@@ -95,12 +125,6 @@ const ProfilePage = () => {
             <div className="profile-section">
               <h2>Delete Account</h2>
               <div className="detail-item">
-                <input
-                  type="password"
-                  placeholder="Enter your password to delete account"
-                  value={deletePassword}
-                  onChange={(e) => setDeletePassword(e.target.value)}
-                />
                 <button className="delete-btn" onClick={handleDelete}>
                   Delete Account
                 </button>
