@@ -42,7 +42,7 @@ function Contact() {
                   Send us an email and we'll get back to you
                 </p>
                 <a
-                  href="mailto:contact@company.com"
+                  href="mailto:wishlist@list.com"
                   className="contact-button email-button"
                 >
                   contact@yourcompany.com
@@ -54,30 +54,6 @@ function Contact() {
                 <p>Tuesday and Thursday</p>
                 <p>10:00 AM - 11:50 AM PST</p>
                 <p className="response-time">Average response time: 24 hours</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="faq-section">
-            <h2>Frequently Asked Questions</h2>
-            <div className="faq-list">
-              <div className="faq-item">
-                <h3>idk ask another question</h3>
-                <p>
-                  erm 1
-                </p>
-              </div>
-              <div className="faq-item">
-                <h3>idk ask another question</h3>
-                <p>
-                  erm 2
-                </p>
-              </div>
-              <div className="faq-item">
-                <h3>idk ask another question</h3>
-                <p>
-                  erm 3
-                </p>
               </div>
             </div>
           </div>
