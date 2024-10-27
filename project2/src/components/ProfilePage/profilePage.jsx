@@ -7,7 +7,6 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("userData"));
 
-  // State hooks must be declared at the top level
   const [email, setEmail] = useState(userData ? userData.email : "");
   const [password, setPassword] = useState("");
   const [deletePassword, setDeletePassword] = useState("");
@@ -19,7 +18,7 @@ const ProfilePage = () => {
     }
   }, [navigate, userData]);
 
-  if (!userData) return null; // Prevents rendering if userData is null
+  if (!userData) return null;
 
   const username = userData.email.split("@")[0];
   const capitalizedUsername =
