@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../API/instance"; 
-import "./adminProfilePage.css"; 
+import axiosInstance from "../../API/instance";
+import "./adminProfilePage.css";
 
 const AdminProfilePage = () => {
-  const navigate = useNavigate(); 
-  const [users, setUsers] = useState([]); 
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false); 
-  const [selectedUser, setSelectedUser] = useState(null); 
-  const [errors, setErrors] = useState({}); 
-  const [updateFormData, setUpdateFormData] = useState({ 
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [updateFormData, setUpdateFormData] = useState({
     email: "",
     password: "",
     is_admin: false,
@@ -22,56 +22,60 @@ const AdminProfilePage = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axiosInstance.get("/getUsers/"); // from API
+      const response = await axiosInstance.get("/getUsers/");
       if (response.data) {
-        console.log("Fetched Users:", response.data); 
-        setUsers(response.data); 
+        console.log("Fetched Users:", response.data);
+        setUsers(response.data);
       }
     } catch (error) {
-      console.error("Failed to fetch users:", error); // log error
-      setErrors({ general: "Failed to fetch users. Check server connection or endpoint." });
+      console.error("Failed to fetch users:", error);
+      setErrors({
+        general: "Failed to fetch users. Check server connection or endpoint.",
+      });
     }
   };
 
   const handleAdminStatusChange = async (userEmail) => {
-    const user = users.find((u) => u.email === userEmail); // finding using email
+    const user = users.find((u) => u.email === userEmail);
     if (!user) {
       setErrors({ general: "User not found" });
       return;
     }
 
     try {
-      const url = `/updateUser/?email=${userEmail}`; // updating user GET /updateUser/?email=testuser@example.com
-      const body = { is_admin: !user.is_admin }; 
+      const url = `/updateUser/?email=${userEmail}`;
+      const body = { is_admin: !user.is_admin };
       console.log("Updating admin status:", { url, body });
-      const response = await axiosInstance.patch(url, body); // PATCH request
+      const response = await axiosInstance.patch(url, body);
 
       if (response.status === 200) {
         console.log("Admin status updated successfully"); // log success
         await fetchUsers(); // refresh
       } else {
-        setErrors({ general: "Unexpected response when updating admin status." });
+        setErrors({
+          general: "Unexpected response when updating admin status.",
+        });
       }
     } catch (error) {
       console.error("Failed to update admin status:", error); // log error
-      const errorMessage = error.response?.data?.detail || JSON.stringify(error.response?.data) || "Failed to update admin status.";
-      setErrors({ general: `Error ${error.response?.status}: ${errorMessage}` });
+      const errorMessage =
+        error.response?.data?.detail ||
+        JSON.stringify(error.response?.data) ||
+        "Failed to update admin status.";
+      setErrors({
+        general: `Error ${error.response?.status}: ${errorMessage}`,
+      });
     }
   };
 
   const handleCreateUser = () => {
-    navigate("/createUserPage"); 
+    navigate("/createUserPage");
   };
 
   const handleUpdateClick = (user) => {
-    setSelectedUser(user); // select user
-    setUpdateFormData({
-      email: user.email,
-      password: "",
-      is_admin: user.is_admin,
-    });
+    setSelectedUser(user);
     setErrors({});
-    setUpdateModalOpen(true); // navigate to update modal
+    setUpdateModalOpen(true);
   };
 
   const handleDeleteClick = (user) => {
@@ -79,59 +83,54 @@ const AdminProfilePage = () => {
     setDeleteModalOpen(true); // nav to delete modal
   };
 
-  const handleUpdate = async () => {
-    const userEmail = selectedUser.email; //email of user to update
-
+  const handleUpdate = async (userID) => {
     try {
-      console.log("Attempting to update user with email:", userEmail);
-      const url = `/updateUser/?email=${userEmail}`; // GET /updateUser/?email=testuser@example.com
+      const url = `/updateUser/${userID}`;
       const body = {
-        new_email: updateFormData.email,
+        email: updateFormData.email,
+
         is_admin: updateFormData.is_admin,
       };
 
       if (updateFormData.password) {
-        body.password = updateFormData.password; // password optional part
+        body.password = updateFormData.password;
       }
 
       console.log("Sending PATCH request:", { url, body });
 
-      const response = await axiosInstance.patch(url, body); // PATCH request
+      const response = await axiosInstance.patch(url, body);
 
       if (response.status === 200) {
-        console.log("User updated successfully:", response.data); // log success
-        await fetchUsers(); // refresh 
-        setUpdateModalOpen(false); // close update modal
+        console.log("User updated successfully:", response.data);
+        await fetchUsers();
+        alert("User Updated Successfully");
+        setUpdateModalOpen(false);
         setErrors({});
       } else {
         setErrors({ general: "Unexpected response from the server." });
       }
     } catch (error) {
       console.error("Error updating user:", error); // log error
-      const errorMessage = error.response?.data?.detail || JSON.stringify(error.response?.data) || "Network error or server is not reachable";
-      setErrors({ general: `Error ${error.response?.status}: ${errorMessage}` });
+      const errorMessage =
+        error.response?.data?.detail ||
+        JSON.stringify(error.response?.data) ||
+        "Network error or server is not reachable";
+      setErrors({
+        general: `Error ${error.response?.status}: ${errorMessage}`,
+      });
     }
   };
 
-  const handleDelete = async () => {
-    const emailToDelete = selectedUser?.email; // email to delete user
-
+  const handleDelete = async (userID) => {
     try {
-      console.log("Attempting to delete user with email:", emailToDelete);
-      const url = `/deleteUser/?email=${emailToDelete}`; // OPTIONS /deleteUser/?email=testuser@example.com
-      const response = await axiosInstance.delete(url); // delete req
-
-      if (response.status === 200) {
-        console.log("User deleted successfully"); // log success
-        await fetchUsers(); // refresh
-        setDeleteModalOpen(false); // close delete modal
-      } else {
-        setErrors({ general: "Unexpected server response during delete." });
-      }
+      const response = await axiosInstance.delete(`/deleteUser/${userID}`);
+      console.log(response.data);
+      alert("User successfully deleted.");
+      setDeleteModalOpen(false);
+      await fetchUsers();
     } catch (error) {
-      console.error("Failed to delete user:", error); // log error
-      const errorMessage = error.response?.data?.detail || JSON.stringify(error.response?.data) || "Network error or server is not reachable";
-      setErrors({ general: `Delete error ${error.response?.status}: ${errorMessage}` });
+      console.error("Error deleting account:", error);
+      alert("Error deleting user. Please check the server and try again.");
     }
   };
 
@@ -156,7 +155,10 @@ const AdminProfilePage = () => {
         </div>
 
         {errors.general && (
-          <div className="error-message" style={{ color: "red", marginBottom: "20px" }}>
+          <div
+            className="error-message"
+            style={{ color: "red", marginBottom: "20px" }}
+          >
             {errors.general}
           </div>
         )}
@@ -185,10 +187,16 @@ const AdminProfilePage = () => {
                     />
                   </td>
                   <td className="action-buttons">
-                    <button className="update-btn" onClick={() => handleUpdateClick(user)}>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleUpdateClick(user)}
+                    >
                       Update
                     </button>
-                    <button className="delete-btn" onClick={() => handleDeleteClick(user)}>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDeleteClick(user)}
+                    >
                       Delete
                     </button>
                   </td>
@@ -203,11 +211,14 @@ const AdminProfilePage = () => {
           <div className="modal-overlay">
             <div className="modal-content">
               <h2>Update User</h2>
-              {errors.general && <p className="error-message">{errors.general}</p>}
+              {errors.general && (
+                <p className="error-message">{errors.general}</p>
+              )}
               <div className="form-group">
                 <label>Email</label>
                 <input
                   type="email"
+                  placeholder={selectedUser?.email}
                   value={updateFormData.email}
                   onChange={(e) =>
                     setUpdateFormData({
@@ -217,7 +228,9 @@ const AdminProfilePage = () => {
                   }
                   className="modal-input"
                 />
-                {errors.email && <p className="error-message">{errors.email}</p>}
+                {errors.email && (
+                  <p className="error-message">{errors.email}</p>
+                )}
               </div>
               <div className="form-group">
                 <label>New Password (optional)</label>
@@ -249,10 +262,16 @@ const AdminProfilePage = () => {
                 <label>Admin Status</label>
               </div>
               <div className="modal-actions">
-                <button className="cancel-btn" onClick={() => setUpdateModalOpen(false)}>
+                <button
+                  className="cancel-btn"
+                  onClick={() => setUpdateModalOpen(false)}
+                >
                   Cancel
                 </button>
-                <button className="confirm-btn" onClick={handleUpdate}>
+                <button
+                  className="confirm-btn"
+                  onClick={() => handleUpdate(selectedUser?.id)}
+                >
                   Update
                 </button>
               </div>
@@ -265,12 +284,20 @@ const AdminProfilePage = () => {
           <div className="modal-overlay">
             <div className="modal-content">
               <h2>Confirm Delete</h2>
-              <p>Are you sure you want to delete user: {selectedUser?.email}?</p>
+              <p>
+                Are you sure you want to delete user: {selectedUser?.email}?
+              </p>
               <div className="modal-actions">
-                <button className="cancel-btn" onClick={() => setDeleteModalOpen(false)}>
+                <button
+                  className="cancel-btn"
+                  onClick={() => setDeleteModalOpen(false)}
+                >
                   Cancel
                 </button>
-                <button className="delete-btn" onClick={handleDelete}>
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDelete(selectedUser?.id)}
+                >
                   Delete
                 </button>
               </div>
