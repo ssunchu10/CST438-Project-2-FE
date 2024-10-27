@@ -2,27 +2,33 @@ import React from "react";
 import "./about.css";
 import Navbar from "../Navbar/Navbar";
 
+// images
+import diegoZavala from "../../assests/diego zavala.png";
+import kylaUsi from "../../assests/kyla usi.png";
+import mikaLagumbay from "../../assests/mika lagumbay.png";
+import sumitSunchu from "../../assests/sumit sunchu.png";
+
 function About() {
   const teamMembers = [
     {
       name: "Diego Zavala",
       role: "Backend Dev",
-      // image: "/path"
+      image: diegoZavala
     },
     {
       name: "Kyla Usi",
       role: "Backend Dev",
-      // image: "/path"
+      image: kylaUsi
     },
     {
       name: "Mika Lagumbay",
       role: "Frontend Dev",
-      // image: "/path"
+      image: mikaLagumbay
     },
     {
       name: "Sumit Sunchu",
       role: "Frontend Dev",
-      // image: "/path"
+      image: sumitSunchu
     },
   ];
 
@@ -34,14 +40,17 @@ function About() {
           <h1 className="main-title">Get to Know Us</h1>
           <div className="header-underline"></div>
         </div>
-
+        
         <div className="team-section">
           <h2>Our Team</h2>
           <div className="team-grid">
             {teamMembers.map((member, index) => (
               <div key={index} className="team-card">
                 <div className="member-image">
-                  <img src={member.image} alt={member.name} />
+                  <img 
+                    src={member.image}
+                    alt={member.name}
+                  />
                 </div>
                 <div className="member-info">
                   <h3>{member.name}</h3>
