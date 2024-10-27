@@ -9,7 +9,7 @@ import About from "./components/About/about";
 
 import AddItemPage from "./components/AddItemPage/addItemPage";
 import DeleteItemPage from "./components/DeleteItemPage/deleteItemPage";
-import UpdateItemPage from "./components/UpdateItemPage/updateItemPage";
+import UpdateItemPage from "./components/updateItemPage/updateItemPage";
 import AdminProfilePage from "./components/ProfilePage/adminProfilePage";
 import ProfilePage from "./components/ProfilePage/profilePage";
 import ListPage from "./components/ListPage/listPage";
